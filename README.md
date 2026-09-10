@@ -53,7 +53,7 @@ Este ejercicio no requiere escribir programas nuevos: se trata de leer código y
         }
     ```
       
-    Responda además: ¿qué pasaría si en el último ciclo se reemplazara `nombre?.length ?: -1` por nombre!!.length?` ¿En qué iteración fallaría y con qué excepción?
+    Responda además: ¿qué pasaría si en el último ciclo se reemplazara `nombre?.length ?: -1` por `nombre!!.length?` ¿En qué iteración fallaría y con qué excepción?
      
 <br>
 
@@ -101,3 +101,43 @@ Este ejercicio no requiere escribir programas nuevos: se trata de leer código y
             return resultado
         }
     ```
+  
+
+<br>
+
+---
+
+### Ejercicio 2: Analizador de datos mixtos
+
+En este ejercicio no se deben crear clases. El objetivo es dominar when, los ciclos y la conversión de tipos. Partiendo de la siguiente lista:
+
+  ```kotlin
+    val datos: List<Any?> = listOf(15, "42", 3.5, "hola", true, null, -8, "7.5", 100)
+  ```
+
+implemente:
+
+  1. `fun clasificar(valor: Any?): String` que use `when` con `is` para retornar el tipo del valor en texto: "entero", "decimal", "texto", "booleano" o "desconocido" cuando el valor sea nulo.
+
+  2. `fun aNumero(valor: Any?): Double?` que intente convertir cualquier valor a Double:
+
+     - Si es `Int` o `Double`, lo convierte con `toDouble()`.
+     - Si es `String`, lo convierte usando `try` como expresión (`toDouble()` lanza `NumberFormatException`), retornando `null` si no es convertible.
+     - En cualquier otro caso retorna `null`.
+
+  3. `fun rangoDe(numero: Int): String` que use `when` con rangos `(in, !in)` para retornar: "negativo" para valores menores a 0, "dígito" entre 0 y 9, "decena" entre 10 y 99, y "grande" en cualquier otro caso.
+
+  4. En `main`, recorra datos con `withIndex()` e imprima una línea por elemento con este formato exacto:
+
+      > - [0] 15 -> entero | numérico: 15.0 | rango: decena
+      > - [1] 42 -> texto | numérico: 42.0 | rango: decena
+      > - [3] hola -> texto | numérico: no aplica | rango: no aplica
+      > - [5] null -> desconocido | numérico: no aplica | rango: no aplica
+
+     Use el operador Elvis para mostrar "no aplica" cuando la conversión retorne null.
+
+
+  5. Calcule e imprima la suma de todos los valores convertibles a número, usando un ciclo (no use sum() ni filter).
+
+
+
