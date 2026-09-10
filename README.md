@@ -107,7 +107,7 @@ Este ejercicio no requiere escribir programas nuevos: se trata de leer código y
 
 ---
 
-### Ejercicio 2: Analizador de datos mixtos
+### [Ejercicio 2: Analizador de datos mixtos](src/ejercicio_02/Ejercicio_A.kt)
 
 En este ejercicio no se deben crear clases. El objetivo es dominar when, los ciclos y la conversión de tipos. Partiendo de la siguiente lista:
 
@@ -139,5 +139,17 @@ implemente:
 
   5. Calcule e imprima la suma de todos los valores convertibles a número, usando un ciclo (no use sum() ni filter).
 
+
+<br>
+
+- ### [Parte B: Ciclos y arreglos](src/ejercicio_02/Ejercicio_B.kt)
+
+    1. Cree un arreglo vacío de 10 posiciones con `arrayOfNulls<Int>(10)` y llénelo con los números pares del 2 al 20 usando un ciclo con `step`.
+    
+    2. Recórralo con `índices` e imprima únicamente las posiciones impares del arreglo.
+    
+    3. Imprima una cuenta regresiva de 20 a 0 de 5 en 5 usando `downTo` y `step`, en una sola línea separada por `,` .
+  
+    4. Explique en un comentario la diferencia entre `for (i in 0..arreglo.size)` y `for (i in 0 until arreglo.size)`, y por qué la primera opción falla.
 
 
