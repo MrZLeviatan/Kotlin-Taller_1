@@ -241,7 +241,7 @@ Este ejercicio se centra en modelar estados y transiciones, no en manipular list
 
 ---
 
-### [Ejercicio 5: Sistema hospitalario (herencia e interfaces)]()
+### [Ejercicio 5: Sistema hospitalario (herencia e interfaces)](src/ejercicio_05/Ejercicio_5.kt)
 
 Este ejercicio se centra en la programación orientada a objetos con Kotlin: herencia, constructores e interfaces.
 
