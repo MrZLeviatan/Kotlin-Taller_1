@@ -219,8 +219,10 @@ Este ejercicio se centra en modelar estados y transiciones, no en manipular list
 
 5. Una función `describir(tarea: Tarea): String` que use `when` sobre el estado y aproveche el `smart cast` para incluir los datos propios de cada subclase. Por ejemplo:
 
-    > - [ALTA] Entregar informe: en progreso (60%)
-    > - [BAJA] Ordenar escritorio: cancelada por "ya no es necesario"
+    ```text
+        [ALTA] Entregar informe: en progreso (60%)
+        [BAJA] Ordenar escritorio: cancelada por "ya no es necesario"
+    ```
 
     La función **NO** debe usar `else:` al ser una `sealed class`, el compilador verifica que todos los casos estén cubiertos. Comente una de las ramas y observe el error que reporta el compilador; documéntelo.
 
@@ -235,3 +237,51 @@ Este ejercicio se centra en modelar estados y transiciones, no en manipular list
 7. En `main`, cree una tarea en estado Pendiente y llame avanzar varias veces en un ciclo hasta que `esFinal()` retorne `true`, imprimiendo la descripción en cada paso. Verifique que el estado nunca supere el 100%.
 
 
+<br>
+
+---
+
+### [Ejercicio 5: Sistema hospitalario (herencia e interfaces)]()
+
+Este ejercicio se centra en la programación orientada a objetos con Kotlin: herencia, constructores e interfaces.
+
+1. Una interfaz `Identificable` con la propiedad `identificacion: String` y una función `resumenIdentidad(): String` con implementación por defecto que retorne el nombre y la identificación.
+
+
+2. Una clase `open class Persona(val nombre: String, override val identificacion: String, val genero: Genero) : Identificable` donde:
+
+   - `Genero` es un `enum class` con los valores MASCULINO, FEMENINO y OTRO.
+   - La clase tiene una propiedad `correo: String?` con valor por defecto null.
+   - Un bloque `init` válida que el nombre no esté vacío y lanza una excepción en caso contrario.
+   - Sobreescribe `toString()` con override.
+
+
+3. Un `enum class` llamado **Especialidad** con al menos los valores PEDIATRÍA, CARDIOLOGÍA y NEUROLOGÍA, y una clase **Medico** que herede de Persona y agregue `especialidad (Especialidad), salario (Double) y anioIngreso (Int)`. Debe tener:
+ 
+    - Un **constructor secundario** que reciba solo nombre, identificación, género y especialidad, y delegue en el primario asignando un salario base por defecto y el año actual.
+    - Una función `antiguedad(anioActual: Int = 2026): Int`.
+    - `override` de `resumenIdentidad()` para incluir la especialidad.
+
+
+4. Una clase **Paciente** que herede de Persona y agregue `telefono (String)` y `direccion (data class Direccion(val calle: String, val ciudad: String, val codigoPostal: String)`).
+
+
+5. Una clase Hospital con listas mutables de médicos y pacientes que permita:
+
+    - `agregarMedico`, `eliminarMedico`, `agregarPaciente`, `eliminarPaciente`.
+    - `totalSalarios(especialidad: Especialidad): Double`, recorriendo la lista con un ciclo.
+    - `medicoConMasAntiguedad(): Medico?` que retorne `null` cuando no haya médicos registrados (no use `!!`).
+    - `contactar(identificacion: String): String` que busque la persona y retorne su correo usando el operador `Elvis` para devolver "Sin correo registrado" cuando sea nulo.
+
+
+6. En `main`, registre al menos 3 médicos y 3 pacientes, invoque todas las operaciones e imprima los resultados. Verifique el comportamiento de `medicoConMasAntiguedad()` sobre un hospital vacío.
+
+
+No se requiere interfaz gráfica de usuario.
+
+<br>
+
+---
+
+
+ 
