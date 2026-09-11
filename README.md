@@ -153,3 +153,38 @@ implemente:
     4. Explique en un comentario la diferencia entre `for (i in 0..arreglo.size)` y `for (i in 0 until arreglo.size)`, y por qué la primera opción falla.
 
 
+<br>
+
+### Ejercicio 3: Inventario con data classes y extensiones
+
+Implemente lo siguiente:
+Una data class llamada Producto con las propiedades: nombre (String), precio (Double) y cantidad (Int).
+Una función de extensión sobre Producto llamada valorTotal() que retorne el precio multiplicado por la cantidad.
+Una función aplicarDescuento que reciba un Producto y un porcentaje de descuento con valor por defecto de 10%, y retorne una copia del producto con el precio modificado (usar copy()). Debe poder invocarse de estas tres formas:
+aplicarDescuento(producto)
+aplicarDescuento(producto, 25.0)
+aplicarDescuento(producto, porcentaje = 25.0)
+
+
+### Requerimientos
+
+1. **Data class Producto**
+    - Propiedades:
+        - `nombre` (String)
+        - `precio` (Double)
+        - `cantidad` (Int)
+
+2. **Función de extensión sobre Producto**
+    - Nombre: `valorTotal()`
+    - Retorna el resultado de `precio * cantidad`.
+
+3. **Función aplicarDescuento**
+    - Recibe:
+        - Un objeto `Producto`
+        - Un porcentaje de descuento (`Double`) con valor por defecto de **10%**
+    - Retorna:
+        - Una copia del producto con el precio modificado (usar `copy()`).
+    - Debe poder invocarse de las siguientes formas:
+        - `aplicarDescuento(producto)`
+        - `aplicarDescuento(producto, 25.0)`
+        - `aplicarDescuento(producto, porcentaje = 25.0)`
