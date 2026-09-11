@@ -157,15 +157,15 @@ implemente:
 
 ---
 
-### [Ejercicio 3: Inventario con data classes y extensiones]()
+### [Ejercicio 3: Inventario con data classes y extensiones](src/ejercicio_03/Ejecicio_3.kt)
 
 Implemente lo siguiente:
 
-- Una `data class` llamada **Producto** con las propiedades: `nombre (String), precio (Double) y cantidad (Int)`.
+1. Una `data class` llamada **Producto** con las propiedades: `nombre (String), precio (Double) y cantidad (Int)`.
 
-- Una función de extensión sobre **Producto** llamada `valorTotal()` que retorne el precio multiplicado por la cantidad.
+2. Una función de extensión sobre **Producto** llamada `valorTotal()` que retorne el precio multiplicado por la cantidad.
 
-- Una función `aplicarDescuento` que reciba un **Producto** y un porcentaje de descuento con valor por defecto de 10%, y retorne una copia del producto con el precio modificado (`usar copy()`). Debe poder invocarse de estas tres formas:
+3. Una función `aplicarDescuento` que reciba un **Producto** y un porcentaje de descuento con valor por defecto de 10%, y retorne una copia del producto con el precio modificado (`usar copy()`). Debe poder invocarse de estas tres formas:
   
   ```kotlin
     aplicarDescuento(producto)
@@ -173,7 +173,7 @@ Implemente lo siguiente:
     aplicarDescuento(producto, porcentaje = 25.0)
   ```
 
-- Una función de extensión sobre `List<Producto>` llamada `resumen()` que retorne un `String` con el siguiente formato (usando interpolación de cadenas y forEach):
+4. Una función de extensión sobre `List<Producto>` llamada `resumen()` que retorne un `String` con el siguiente formato (usando interpolación de cadenas y forEach):
 
     ```text
         Inventario (3 productos):
@@ -183,14 +183,55 @@ Implemente lo siguiente:
         Total inventario: 1135000.0
     ```
   
-- Una función de extensión sobre **Producto** llamada `estaAgotado()` que retorne `true` cuando la cantidad sea 0.
+5. Una función de extensión sobre **Producto** llamada `estaAgotado()` que retorne `true` cuando la cantidad sea 0.
 
-- En main:
 
-  - Cree una lista con al menos 5 productos e imprima el resumen.
-  - Aplique descuentos a dos productos y verifique que los productos originales no cambiaron (imprima ambos y explique por qué en un comentario).
-  - Use desestructuración para recorrer la lista e imprimir solo nombre y precio.
-  - Compare dos productos creados con los mismos valores usando `==` y `===`, e imprima ambos resultados. Explique en un comentario por qué la data class hace que `==` sea true.
+6. En main:
+
+   - Cree una lista con al menos 5 productos e imprima el resumen.
+   - Aplique descuentos a dos productos y verifique que los productos originales no cambiaron (imprima ambos y explique por qué en un comentario).
+   - Use desestructuración para recorrer la lista e imprimir solo nombre y precio.
+   - Compare dos productos creados con los mismos valores usando `==` y `===`, e imprima ambos resultados. Explique en un comentario por qué la data class hace que `==` sea true.
 
 <br>
+
+---
+
+### [Ejercicio 4: Máquina de estados con sealed classes](src/ejercicio_04/Ejercicio_4.kt)
+
+Este ejercicio se centra en modelar estados y transiciones, no en manipular listas.
+
+1. Un `enum class` llamado **Prioridad** con los valores BAJA, MEDIA, ALTA y CRÍTICA, cada uno con una propiedad `nivel` de tipo `Int` (1 a 4 respectivamente) y una función `esUrgente()` que retorne `true` cuando el nivel sea mayor o igual a 3.
+
+
+2. Una `sealed class` llamada `EstadoTarea` con las subclases:
+   - `Pendiente` (sin propiedades adicionales)
+   - `EnProgreso(val porcentaje: Int)`
+   - `Completada(val fechaFinalizacion: String)`
+   - `Cancelada(val motivo: String)`
+
+
+3. Una `data class` llamada Tarea con: `titulo (String)`, `descripcion (String?)`, `prioridad (Prioridad)` y `estado (EstadoTarea)`.
+
+
+4. Una función de extensión `EstadoTarea.esFinal(): Boolean` que use `when` para indicar si desde ese estado ya no hay transiciones posibles (Completada y Cancelada son finales).
+
+
+5. Una función `describir(tarea: Tarea): String` que use `when` sobre el estado y aproveche el `smart cast` para incluir los datos propios de cada subclase. Por ejemplo:
+
+    > - [ALTA] Entregar informe: en progreso (60%)
+    > - [BAJA] Ordenar escritorio: cancelada por "ya no es necesario"
+
+    La función **NO** debe usar `else:` al ser una `sealed class`, el compilador verifica que todos los casos estén cubiertos. Comente una de las ramas y observe el error que reporta el compilador; documéntelo.
+
+
+6. Una función `avanzar(tarea: Tarea, incremento: Int): Tarea` que retorne una nueva tarea aplicando estas reglas con `when`:
+    
+    - Si está Pendiente, pasa a EnProgreso con el porcentaje del incremento.
+    - Si está EnProgreso, suma el incremento al porcentaje actual; si alcanza o supera 100, pasa a Completada con la fecha "2026-01-01".
+    - Si el estado ya es final, retorna la tarea sin cambios.
+
+
+7. En `main`, cree una tarea en estado Pendiente y llame avanzar varias veces en un ciclo hasta que `esFinal()` retorne `true`, imprimiendo la descripción en cada paso. Verifique que el estado nunca supere el 100%.
+
 
