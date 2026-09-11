@@ -155,75 +155,42 @@ implemente:
 
 <br>
 
-## Ejercicio 3: Inventario con data classes y extensiones
+---
+
+### [Ejercicio 3: Inventario con data classes y extensiones]()
 
 Implemente lo siguiente:
-Una data class llamada Producto con las propiedades: nombre (String), precio (Double) y cantidad (Int).
-Una función de extensión sobre Producto llamada valorTotal() que retorne el precio multiplicado por la cantidad.
-Una función aplicarDescuento que reciba un Producto y un porcentaje de descuento con valor por defecto de 10%, y retorne una copia del producto con el precio modificado (usar copy()). Debe poder invocarse de estas tres formas:
-aplicarDescuento(producto)
-aplicarDescuento(producto, 25.0)
-aplicarDescuento(producto, porcentaje = 25.0)
 
+- Una `data class` llamada **Producto** con las propiedades: `nombre (String), precio (Double) y cantidad (Int)`.
 
-### Requerimientos
+- Una función de extensión sobre **Producto** llamada `valorTotal()` que retorne el precio multiplicado por la cantidad.
 
-1. **Data class Producto**
-    - Propiedades:
-        - `nombre` (String)
-        - `precio` (Double)
-        - `cantidad` (Int)
+- Una función `aplicarDescuento` que reciba un **Producto** y un porcentaje de descuento con valor por defecto de 10%, y retorne una copia del producto con el precio modificado (`usar copy()`). Debe poder invocarse de estas tres formas:
+  
+  ```kotlin
+    aplicarDescuento(producto)
+    aplicarDescuento(producto, 25.0)
+    aplicarDescuento(producto, porcentaje = 25.0)
+  ```
 
-2. **Función de extensión sobre Producto**
-    - Nombre: `valorTotal()`
-    - Retorna el resultado de `precio * cantidad`.
+- Una función de extensión sobre `List<Producto>` llamada `resumen()` que retorne un `String` con el siguiente formato (usando interpolación de cadenas y forEach):
 
-3. **Función aplicarDescuento**
-    - Recibe:
-        - Un objeto `Producto`
-        - Un porcentaje de descuento (`Double`) con valor por defecto de **10%**
-    - Retorna:
-        - Una copia del producto con el precio modificado (usar `copy()`).
-    - Debe poder invocarse de las siguientes formas:
-        - `aplicarDescuento(producto)`
-        - `aplicarDescuento(producto, 25.0)`
-        - `aplicarDescuento(producto, porcentaje = 25.0)`
+    ```text
+        Inventario (3 productos):
+        - Teclado: 80000.0 x 2 = 160000.0
+        - Mouse: 45000.0 x 5 = 225000.0
+        - Monitor: 750000.0 x 1 = 750000.0
+        Total inventario: 1135000.0
+    ```
+  
+- Una función de extensión sobre **Producto** llamada `estaAgotado()` que retorne `true` cuando la cantidad sea 0.
 
+- En main:
 
+  - Cree una lista con al menos 5 productos e imprima el resumen.
+  - Aplique descuentos a dos productos y verifique que los productos originales no cambiaron (imprima ambos y explique por qué en un comentario).
+  - Use desestructuración para recorrer la lista e imprimir solo nombre y precio.
+  - Compare dos productos creados con los mismos valores usando `==` y `===`, e imprima ambos resultados. Explique en un comentario por qué la data class hace que `==` sea true.
 
 <br>
 
-## Punto 2 del ejercicio 3. Función de extensión `resumen()` sobre `List<Producto>`
-
-### Descripción
-
-Se requiere crear una **función de extensión** en Kotlin que opere sobre una lista de objetos de tipo `Producto`. Esta función debe devolver un `String` que presente un resumen formateado de todos los productos contenidos en la lista.
-
-### Características principales
-
-- **Tipo de extensión:** `List<Producto>`
-- **Nombre de la función:** `resumen()`
-- **Valor de retorno:** `String`
-- **Técnicas requeridas:**
-    - Interpolación de cadenas (uso de `$variable` o `${expresión}`)
-    - Recorrido de la colección mediante `forEach`
-
-### Comportamiento esperado
-
-La función debe iterar sobre cada elemento de la lista utilizando `forEach`, y para cada producto construir una línea de texto que incluya su información relevante (por ejemplo: nombre, precio, cantidad, categoría, etc., según los atributos definidos en la clase `Producto`).
-
-El resultado final será un `String` único que contenga todas las líneas concatenadas, probablemente separadas por saltos de línea (`\n`) para lograr una presentación legible.
-
-### Estructura conceptual
-
-1. Declarar la función como extensión: `fun List<Producto>.resumen(): String`
-2. Inicializar una variable mutable de tipo `String` (por ejemplo, `resultado`) vacía.
-3. Usar `forEach` sobre la lista para recorrer cada producto.
-4. Dentro del `forEach`, emplear interpolación de cadenas para agregar al resultado la información formateada del producto.
-5. Retornar la cadena acumulada.
-
-### Notas
-
-- La interpolación permite insertar valores de propiedades del producto directamente dentro del texto, evitando concatenaciones manuales.
-- El uso de `forEach` garantiza un recorrido funcional y conciso de la colección.
-- El formato exacto (orden de campos, separadores, encabezados) dependerá de los atributos definidos en la clase `Producto` y de los requisitos específicos del enunciado original.

@@ -49,7 +49,7 @@ fun main() {
     println(numeros)
 
     /*
-        4. Error
+        5. Error
         Kotlin al ser un lenguaje altamente tipado, no permite la operación entre variables de diferentes tipos. En este caso lo mejor
             será cambiar el tipo de texto a un entero con los Castings (con el fin de poder realizar la operación). Es un error
                 que igualmente se puede ver en Java por su también tipado fuerte.
